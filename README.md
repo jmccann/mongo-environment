@@ -38,4 +38,4 @@ How to Use
 
 Notes
 =====
-There is an issue with i18n gem installed with vagrant plugins.  See [https://github.com/andrewgross/vagrant-chef-zero/issues/51].  Please be sure to follow instructions @ [https://github.com/andrewgross/vagrant-chef-zero/issues/51#issuecomment-57443582] to workaround this issue until PR [https://github.com/svenfuchs/i18n/pull/292] is accepted and merged and a new release of i18n provided and gem dependencies updated.
+There is an issue with i18n gem installed with vagrant plugins.  See https://github.com/andrewgross/vagrant-chef-zero/issues/51.  Please be sure to follow instructions @ https://github.com/andrewgross/vagrant-chef-zero/issues/51#issuecomment-57443582 to workaround this issue until PR https://github.com/svenfuchs/i18n/pull/292 is accepted and merged and a new release of i18n provided and gem dependencies updated.
