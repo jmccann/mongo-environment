@@ -1,6 +1,6 @@
 Vagrant.configure('2') do |config|
   # Prepare berks
-  [:up, :provision, :destroy].each do |cmd|
+  [:up, :provision].each do |cmd|
     config.trigger.before cmd, stdout: true, force: true, vm: /^configserver$/ do
       run 'rm -f Berksfile.lock'
       run 'mkdir chef-repo'
@@ -8,6 +8,11 @@ Vagrant.configure('2') do |config|
       run 'tar -C chef-repo -xzf chef-repo/cookbooks.tar.gz'
       run 'pkill -f chef-zero'
     end
+  end
+
+  # Kill chef-zero on destroy
+  config.trigger.before :destroy, stdout: true, force: true, vm: /^configserver$/ do
+    run 'pkill -f chef-zero'
   end
 
   # Install Chef
