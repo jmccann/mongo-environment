@@ -10,14 +10,11 @@ Requirements
 * vagrant-omnibus - Install chef-client to VMs
 * vagrant-chef-zero - Run a in memory chef-server on your host system
 * vagrant-triggers - Run scripts before/after VM commands
-* vagrant-berkshelf - Use Berksfile for resolving chef cookbooks
-  * [chef DK](https://downloads.getchef.com/chef-dk/)? (In support of vagrant-berkshelf?)
 
 ```
 vagrant plugin install vagrant-omnibus
 vagrant plugin install vagrant-chef-zero
 vagrant plugin install vagrant-triggers
-vagrant plugin install vagrant-berkshelf
 ```
 
 Resources Needed

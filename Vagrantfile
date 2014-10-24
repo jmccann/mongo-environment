@@ -3,7 +3,9 @@ Vagrant.configure('2') do |config|
   [:up, :provision, :destroy].each do |cmd|
     config.trigger.before cmd, stdout: true, force: true, vm: /^configserver$/ do
       run 'rm -f Berksfile.lock'
-      run 'berks install'
+      run 'mkdir chef-repo'
+      run 'berks package chef-repo/cookbooks.tar.gz'
+      run 'tar -C chef-repo -xzf chef-repo/cookbooks.tar.gz'
       run 'pkill -f chef-zero'
     end
   end
@@ -14,6 +16,10 @@ Vagrant.configure('2') do |config|
 
   # Chef-Zero
   config.chef_zero.enabled = true
+  config.chef_zero.cookbooks = 'chef-repo/cookbooks'
+
+  # Disabling the Berkshelf plugin
+  config.berkshelf.enabled = false
 
   config.vm.define 'configserver' do |cs|
     # Set hostname
@@ -27,9 +33,6 @@ Vagrant.configure('2') do |config|
     cs.vm.box_url = 'chef/centos-6.5'
 
     cs.vm.network :private_network, ip: '33.33.33.40'
-
-    # Enabling the Berkshelf plugin
-    cs.berkshelf.enabled = true
 
     # Chef run to create things
     cs.vm.provision :chef_client do |chef|
@@ -55,9 +58,6 @@ Vagrant.configure('2') do |config|
     mongos.vm.box_url = 'chef/centos-6.5'
 
     mongos.vm.network :private_network, ip: '33.33.33.41'
-
-    # Enabling the Berkshelf plugin
-    mongos.berkshelf.enabled = true
 
     # Chef run to create things
     mongos.vm.provision :chef_client do |chef|
